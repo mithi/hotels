@@ -2,9 +2,9 @@
 
 ## ✅ Task and features
 
-- ➡️ Retrieve data from API and display them as I deem fit
+- ➡️ ✅ Retrieve data from API and display them as I deem fit
 
-- ➡️ Ability to switch to preferred currency, persist selected currency in the browser
+- ➡️ ✅ Ability to switch to preferred currency, persist selected currency in the browser
 
 - ➡️ Display prices given selected currency
 
@@ -14,7 +14,7 @@
 
 - ➡️ If applicable, Display "Save X%" message to highlight if there's a more expensive competition
 
-- ➡️ If applicable, show a strikethrough rate of most expensive competitor
+- ➡️ If applicable, show a strikethrough rate of the most expensive competitor
 
 - ➡️ Show an icon / astesisk to indicate that price is tax inclusive
 
@@ -51,7 +51,7 @@
 
 - ➡️ Competitor prices are optional
 
-- ➡️ Taxes and fees are optional, if givent, current price is tax-inclusive else, tax exclusive
+- ➡️ Taxes and fees are optional, if given, current price is tax-inclusive else, tax exclusive
 
 ## ✅ Expectations
 
@@ -61,6 +61,6 @@
 
 - ➡️ Consistency - 2 similar use cases / displays, centralized handling
 
-- ➡️ Testing - Emphasise having tests to ensure reliable code, write specs for essetial logic in your features
+- ➡️ Testing - Emphasize having tests to ensure reliable code, write specs for essential logic in your features
 
 https://gist.github.com/mal90/4627e6beb44ec038b90f64ea1bb30638
