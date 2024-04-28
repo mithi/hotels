@@ -25,3 +25,6 @@ export type CurrencyInfo = {
   name: CurrencyIdentifier
   description: string
 }
+
+export type ProviderItem = { provider: string; price: number; highlighted?: boolean }
+export type GenericItem = { field: string; value: string; highlighted?: boolean }

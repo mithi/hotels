@@ -1,17 +1,19 @@
 import BookingCard from "./booking-card"
 import HotelCardLayout from "./hotel-card-layout"
-import Rating from "./rating"
+import HotelStars from "./hotel-stars"
 import PriceBreakdownTable from "./price-breakdown-table"
 import PriceItem from "./price-item"
-import SeeMoreDescription from "./see-more-description"
 import ProviderPriceTable from "./provider-price-table"
+import Rating from "./rating"
+import SeeMoreDescription from "./see-more-description"
 
 export {
   BookingCard,
   HotelCardLayout,
-  Rating,
-  PriceBreakdownTable,
+  HotelStars,
   PriceItem,
-  SeeMoreDescription,
+  PriceBreakdownTable,
   ProviderPriceTable,
+  Rating,
+  SeeMoreDescription,
 }

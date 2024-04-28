@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton"
-import { HotelCardLayout } from "./common/hotel-card-layout"
+import { HotelCardLayout } from "./common"
 
 export const LoadingHotelCard = () => {
   return (

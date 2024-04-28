@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { availableCurrencies } from "@/constants/available-currencies"
+import { availableCurrencies } from "@/constants"
 import { CurrencyIdentifier } from "@/types"
 
 export const CurrencySelect = ({

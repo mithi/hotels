@@ -1,12 +1,6 @@
-export const PriceItem = ({
-  field,
-  value,
-  highlighted,
-}: {
-  field: string
-  value: string
-  highlighted?: boolean
-}) => {
+import { GenericItem } from "@/types"
+
+export const PriceItem = ({ field, value, highlighted }: GenericItem) => {
   return (
     <div
       className={

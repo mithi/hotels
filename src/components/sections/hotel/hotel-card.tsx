@@ -1,5 +1,5 @@
-import { priceDisplay } from "@/lib/utils"
-import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
+import { MapPin } from "lucide-react"
+import { CurrencyIdentifier, HotelInfo, HotelPrice, ProviderItem } from "@/types"
 import {
   BookingCard,
   HotelCardLayout,
@@ -7,10 +7,16 @@ import {
   ProviderPriceTable,
   Rating,
   SeeMoreDescription,
+  HotelStars,
 } from "./common"
-import { MapPin } from "lucide-react"
 import BasicPopover from "@/components/common/basic-popover"
-import HotelStars from "./common/hotel-stars"
+import {
+  computeSavings,
+  mostExpensiveProvider,
+  providerRecordToArray,
+  providersToSortedGenericItems,
+} from "@/lib/hotels"
+import { priceDisplay } from "@/lib/currencies"
 
 function HotelCard({
   name,
@@ -24,35 +30,21 @@ function HotelCard({
 }: HotelInfo & { priceInfo?: HotelPrice } & { currency: CurrencyIdentifier }) {
   const price = priceInfo?.price
 
-  const otherProviders =
+  const otherProviders: ProviderItem[] =
     price != null && priceInfo?.competitors
-      ? Object.entries(priceInfo?.competitors ?? {}).map(entry => {
-          const [provider, price] = entry
-          return { provider, price, highlighted: false }
-        })
+      ? providerRecordToArray(priceInfo.competitors)
       : []
 
   const mostExpensive =
-    otherProviders.length > 0
-      ? otherProviders.reduce((acc, provider) => {
-          return acc && acc.price > provider.price ? acc : provider
-        })
-      : null
+    otherProviders.length > 0 ? mostExpensiveProvider(otherProviders) : null
 
-  /* Assume that "Our Price" is a reserved keyword and there  */
+  /* Assume that "Our Price" is a reserved provider here */
   const sortedProviders =
     price != null && otherProviders.length > 0
-      ? [...otherProviders, { provider: "Our Price", price, highlighted: true }]
-          .sort((a, b) => {
-            return a.price < b.price ? -1 : 1
-          })
-          ?.map(item => {
-            return {
-              field: item.provider,
-              value: priceDisplay(item.price, currency),
-              highlighted: item.highlighted,
-            }
-          })
+      ? providersToSortedGenericItems(
+          [...otherProviders, { provider: "Our Price", price, highlighted: true }],
+          currency
+        )
       : []
 
   const ourPriceDisplay = price != null ? priceDisplay(price, currency) : null
@@ -61,14 +53,12 @@ function HotelCard({
 
   const saveUpTo =
     price != null && mostExpensive?.price != null && price < mostExpensive.price
-      ? ((mostExpensive.price - price) / mostExpensive.price) * 100
+      ? computeSavings(price, mostExpensive.price)
       : 0
 
   return (
     <HotelCardLayout
-      photo={
-        <img className="rounded-md" src={photo} alt={`Preview Image for Hotel ${name}`} />
-      }
+      photo={<img className="rounded-md" src={photo} alt={`Preview Image for ${name}`} />}
       title={name}
       address={
         <>
@@ -86,15 +76,8 @@ function HotelCard({
       stars={<HotelStars value={stars} />}
       availableProviders={
         <div className="flex gap-2 flex-col md:flex-row">
-          {sortedProviders.map(competitor => {
-            return (
-              <PriceItem
-                key={competitor.field}
-                field={competitor.field}
-                value={competitor.value}
-                highlighted={competitor.highlighted}
-              />
-            )
+          {sortedProviders.map(provider => {
+            return <PriceItem key={provider.field} {...provider} />
           })}
         </div>
       }

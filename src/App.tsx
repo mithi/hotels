@@ -1,13 +1,12 @@
 import { useLocalStorage } from "usehooks-ts"
 import useSWR from "swr"
-
 import { HotelCard, LoadingHotelCard } from "@/components/sections/hotel"
-
-import { CurrencyIdentifier, HotelInfo, HotelPrice } from "./types"
-import { CurrencySelect } from "./components/common/currency-select"
-import { fetcher, transformPricesToRecord } from "./lib/utils"
-import ErrorBoundary from "./components/common/error-boundary"
-import { Card } from "./components/ui/card"
+import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
+import { CurrencySelect } from "@/components/common/currency-select"
+import { fetcher } from "@/lib/utils"
+import ErrorBoundary from "@/components/common/error-boundary"
+import { Card } from "@/components/ui/card"
+import { transformPricesToRecord } from "@/lib/hotels"
 
 function App() {
   const [currency, setCurrency] = useLocalStorage<CurrencyIdentifier>(
