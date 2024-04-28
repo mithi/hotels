@@ -6,7 +6,7 @@ import { CurrencySelect } from "@/components/common/currency-select"
 import { fetcher } from "@/lib/utils"
 import ErrorBoundary from "@/components/common/error-boundary"
 import { Card } from "@/components/ui/card"
-import { transformPricesToRecord } from "@/lib/hotels"
+import { moveUnavailableHotelPricesToBottom, transformPricesToRecord } from "@/lib/hotels"
 
 function App() {
   const [currency, setCurrency] = useLocalStorage<CurrencyIdentifier>(
@@ -53,23 +53,12 @@ function App() {
   }
 
   const hotelPriceRecord = transformPricesToRecord(hotelPrices ?? [])
-
-  const sortedHotels = hotels.sort((a, b) => {
-    if (hotelPriceRecord[a.id] != null) {
-      return -1
-    }
-
-    if (hotelPriceRecord[b.id] != null) {
-      return 1
-    }
-
-    return -1
-  })
+  moveUnavailableHotelPricesToBottom(hotels, hotelPriceRecord)
 
   return (
     <>
       <CurrencySelect value={currency} setValue={setCurrency} />
-      {sortedHotels.map(hotelInfo => {
+      {hotels.map(hotelInfo => {
         return (
           <ErrorBoundary
             key={hotelInfo.id}

@@ -6,7 +6,7 @@ import PriceBreakdownTable from "./price-breakdown-table"
 import { ReactNode } from "react"
 
 export const PriceNotAvailable = () => {
-  return <p className="m-1 text-sm font-bold">Rates uavailable</p>
+  return <p className="m-1 text-sm font-bold">Rates unavailable</p>
 }
 
 export const StrikeThroughPrice = ({ value }: { value: string }) => {

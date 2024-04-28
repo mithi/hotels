@@ -52,7 +52,7 @@ function HotelCard({
       stars={<HotelStars value={stars} />}
       availableProviders={
         info.sortedProviders && (
-          <div className="flex gap-2 flex-col sm:flex-row">
+          <div className="flex gap-2 flex-col md:flex-row w-full">
             {info.sortedProviders.map(provider => {
               return <PriceItem key={provider.field} {...provider} />
             })}

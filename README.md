@@ -16,7 +16,7 @@
 
 - ➡️ If applicable, show a strikethrough rate of the most expensive competitor
 
-- ➡️ Show an icon / astesisk to indicate that price is tax inclusive
+- ➡️ Show an icon / asterisk to indicate that price is tax inclusive
 
 - ➡️ On hover, pop-up displays a breakdown of the fee (taxes, fees)
 

@@ -2,10 +2,13 @@ import { availableCurrencies } from "@/constants"
 import { CurrencyIdentifier, CurrencyInfo } from "@/types"
 
 export const availableCurrenciesRecord: Record<CurrencyIdentifier, CurrencyInfo> =
-  availableCurrencies.reduce((acc, curr) => {
-    acc[curr.name] = curr
-    return acc
-  }, {} as Record<CurrencyIdentifier, CurrencyInfo>)
+  availableCurrencies.reduce(
+    (acc, curr) => {
+      acc[curr.name] = curr
+      return acc
+    },
+    {} as Record<CurrencyIdentifier, CurrencyInfo>
+  )
 
 export const priceDisplay = (price: number, currency: CurrencyIdentifier) => {
   /*

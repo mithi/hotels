@@ -1,4 +1,10 @@
-import { CurrencyIdentifier, GenericItem, HotelPrice, ProviderItem } from "@/types"
+import {
+  CurrencyIdentifier,
+  GenericItem,
+  HotelInfo,
+  HotelPrice,
+  ProviderItem,
+} from "@/types"
 import { priceDisplay } from "./currencies"
 
 /* map hotelId -> HotelPrice */
@@ -53,6 +59,15 @@ export const providersToSortedGenericItems = (
     }
   })
   return genericItems
+}
+
+export const moveUnavailableHotelPricesToBottom = (
+  hotels: HotelInfo[],
+  hotelPriceRecord: Record<number, HotelPrice>
+) => {
+  hotels.sort((a, b) => {
+    return hotelPriceRecord[a.id] != null ? -1 : hotelPriceRecord[b.id] != null ? 1 : -1
+  })
 }
 
 export type PriceInfoPresentation = {
