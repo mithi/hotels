@@ -1,66 +1,68 @@
 # Hotels
 
-## ✅ Task and features
+## Features
 
-- ➡️ ✅ Retrieve data from API and display them as I deem fit
+### Hotel Results Display
 
-- ➡️ ✅ Ability to switch to preferred currency, persist selected currency in the browser
+- ✅ Retrieve hotel information and prices and display as I see fit.
+- ✅ If hotel result don't have price, show "Rates Unavailable" and push it to the bottom of list
+- ✅ If prices exist without hotel details, do not show.
 
-- ➡️ Display prices given selected currency
+|                                          |
+| ---------------------------------------- |
+| ![](./screenshots/display-results/1.png) |
 
-- ➡️ Display competitor's rates in the results in an ordered fashion (lowest to highest)
+### Currency Selection
 
-- ➡️ Should handle no / too many competitors available
+- ✅ Allow users to switch currencies and display prices based on selected currency
+- ✅ Refreshing the page should show the last currency selected
+- ✅ Default currency to USD if no currency was last selected.
 
-- ➡️ If applicable, Display "Save X%" message to highlight if there's a more expensive competition
+|                                             |                                             |
+| ------------------------------------------- | ------------------------------------------- |
+| ![](./screenshots/currency-selection/1.png) | ![](./screenshots/currency-selection/2.png) |
 
-- ➡️ If applicable, show a strikethrough rate of the most expensive competitor
+### Price Rounding Based on Currency
 
-- ➡️ Show an icon / asterisk to indicate that price is tax inclusive
+- ✅ Prices are rounded. USD, SGD, CNY are rounded to nearest dollar. KRW, JPW, IDR rounded to nearest 100-dollars.
 
-- ➡️ On hover, pop-up displays a breakdown of the fee (taxes, fees)
+|                                         |                                         |                                         |                                         |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| ![](./screenshots/price-rounding/1.png) | ![](./screenshots/price-rounding/2.png) | ![](./screenshots/price-rounding/3.png) | ![](./screenshots/price-rounding/4.png) |
 
-* Note: Currencies affect rate of data being returned
+### Competitor Displays
 
-## ✅ Important Behaviors
+- ✅ Display competitor rates within results, order from cheapest to most expensive.
+- ✅ UI should work when there's no / too many competitions available.
+- ✅ Also show our rates in the competition list.
 
-- ➡️ Hotel details exist but not price, show "Rates Unavailable" and push at the bottom of the list
+|                                           |                                           |                                           |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| ![](./screenshots/rates-comparison/1.png) | ![](./screenshots/rates-comparison/2.png) | ![](./screenshots/rates-comparison/3.png) |
 
-- ➡️ If hotel details exist but price do, do not display hotel
+### Savings
 
-- ➡️ When page is refreshed, results show in the last currency selected
+- ✅ When applicable, should display "Save X%", if a more expensive competitor exists, show a strikethrough rate of the most expensive competitor price.
 
-- ➡️ Default currency to USD if no currency was last selected
+|                                  |
+| -------------------------------- |
+| ![](./screenshots/savings/1.png) |
 
-- ➡️ Round hotel prices
+### Taxes and Fees
 
-  - USD, SGD, CNY rounded to nearest dollar USD 100.21 -> 100
-  - KRW, JPY, IDR rounded to nearest 100 dollar 300123.22 -> 300,100
+- ✅ When applicable, show an asterisk to indicate our price is tax-inclusive.
+- ✅ On hover, pop-up displays the breakdown of the rates.
+- ✅ If tax and fees are given that means the current price is tax-inclusive and this should be highlighted
 
-- ➡️ If no competitor rates are given, do not show savings
+|                                         |
+| --------------------------------------- |
+| ![](./screenshots/taxes-and-fees/1.png) |
 
-- ➡️ When all competitors are cheaper, no savings
+## Expectations
 
-- ➡️ When 1 or more competitor rates are more expensive than us, we should show our savings over the competitor's rates
+- Correctness, write and run tests
+- Readability, easy to understand
+- Consistency - 2 similar use cases / displays, centralized handling
+- Testing - Emphasize having tests to ensure reliable code, write specs for essential logic in your features
 
-- ➡️ When there's competitor pricing, we should show in the competitor pricing list our rates and where we stand in the ordering of cheapest to most expensive
-
-- ➡️ When taxes & fees are given, that means the price given is already tax inclusive, highlight this in the UI for the results. Example: "taxes and other fees may apply" or show "tax included"
-
-## ✅ API Price Response
-
-- ➡️ Competitor prices are optional
-
-- ➡️ Taxes and fees are optional, if given, current price is tax-inclusive else, tax exclusive
-
-## ✅ Expectations
-
-- ➡️ Correctness, write and run tests
-
-- ➡️ Readability, easy to understand
-
-- ➡️ Consistency - 2 similar use cases / displays, centralized handling
-
-- ➡️ Testing - Emphasize having tests to ensure reliable code, write specs for essential logic in your features
-
-https://gist.github.com/mal90/4627e6beb44ec038b90f64ea1bb30638
+[Specifications](https://gist.github.com/mal90/4627e6beb44ec038b90f64ea1bb30638)
