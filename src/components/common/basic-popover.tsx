@@ -1,5 +1,10 @@
-import { ReactNode } from "react"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { ReactNode, useState } from "react"
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 const BasicPopover = ({
   trigger,
@@ -10,10 +15,29 @@ const BasicPopover = ({
   content: ReactNode
   side?: "top" | "right" | "bottom" | "left"
 }) => {
+  const [open, setOpen] = useState(false)
+
+  const handleMouseEnter = () => {
+    setOpen(true)
+  }
+
+  const handleMouseLeave = () => {
+    setOpen(false)
+  }
+
   return (
-    <Popover>
-      <PopoverTrigger>{trigger}</PopoverTrigger>
-      <PopoverContent side={side ?? "top"}>{content}</PopoverContent>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        {trigger}
+      </PopoverTrigger>
+      <PopoverContent
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        side={side ?? "bottom"}
+      >
+        {content}
+      </PopoverContent>
+      <PopoverAnchor />
     </Popover>
   )
 }

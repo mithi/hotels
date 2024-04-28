@@ -78,7 +78,7 @@ export type PriceInfoPresentation = {
     hotelFee: string
   } | null
   sortedProviders?: GenericItem[]
-  saveUpTo?: number
+  saveUpTo?: number | null
   competitorPrice?: string
 }
 
@@ -123,18 +123,19 @@ export const priceInfoToPresentation = (
     ],
     currency
   )
-  const competitorPrice = priceDisplay(mostExpensive.price, currency)
 
-  const saveUpTo =
+  const savingsInfo =
     priceInfo.price < mostExpensive.price
-      ? computeSavings(priceInfo.price, mostExpensive.price)
-      : 0
+      ? {
+          saveUpTo: computeSavings(priceInfo.price, mostExpensive.price),
+          competitorPrice: priceDisplay(mostExpensive.price, currency),
+        }
+      : {}
 
   return {
     price,
     taxesAndFeesBreakdown,
     sortedProviders,
-    competitorPrice,
-    saveUpTo,
+    ...savingsInfo,
   }
 }

@@ -26,18 +26,10 @@ export const priceDisplay = (price: number, currency: CurrencyIdentifier) => {
 
   const currencySymbol = availableCurrenciesRecord[currency].symbol
 
-  if (["USD", "SGD", "CNY"].includes(currency)) {
-    const roundedPrice = Math.round(price * 100) / 100
-    return `${currencySymbol} ${roundedPrice.toLocaleString(undefined, {
-      maximumFractionDigits: 2,
-      minimumFractionDigits: 2,
-    })}`
-  }
-
-  if (["KRW", "JPY", "IDR"].includes(currency)) {
-    const roundedPrice = Math.round(price / 100) * 100
-    return `${currencySymbol} ${roundedPrice.toLocaleString()}`
-  }
-
-  return `${currencySymbol} ${price}`
+  const roundedPrice = ["USD", "SGD", "CNY"].includes(currency)
+    ? Math.round(price)
+    : ["KRW", "JPY", "IDR"].includes(currency)
+      ? Math.round(price / 100) * 100
+      : price
+  return `${currencySymbol} ${roundedPrice.toLocaleString()}`
 }
