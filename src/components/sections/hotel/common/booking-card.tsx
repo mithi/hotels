@@ -96,7 +96,10 @@ export const BookingCardLayout = ({
   return (
     <div className="border rounded-lg m-0 p-2 flex flex-col justify-end text-end items-end">
       {savings}
-      <div className="flex flex-col md:flex-row md:gap-2 items-end font-bold">
+      <div
+        className="flex flex-col md:flex-row md:gap-2 items-end font-bold"
+        data-testid="booking-card-price"
+      >
         {strikethroughPrice} {price}
       </div>
       {subtitle}

@@ -64,10 +64,10 @@ export const providersToSortedGenericItems = (
 export const moveUnavailableHotelPricesToBottom = (
   hotels: HotelInfo[],
   hotelPriceRecord: Record<number, HotelPrice>
-) => {
-  hotels.sort((a, b) => {
-    return hotelPriceRecord[a.id] != null ? -1 : hotelPriceRecord[b.id] != null ? 1 : -1
-  })
+): HotelInfo[] => {
+  const hotelsWithPrice = hotels.filter(hotel => hotelPriceRecord[hotel.id] != null)
+  const hotelsWithoutPrice = hotels.filter(hotel => hotelPriceRecord[hotel.id] == null)
+  return [...hotelsWithPrice, ...hotelsWithoutPrice]
 }
 
 export type PriceInfoPresentation = {

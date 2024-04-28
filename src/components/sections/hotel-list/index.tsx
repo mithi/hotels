@@ -14,11 +14,11 @@ function HotelList({
   prices: HotelPrice[]
 }) {
   const hotelPriceRecord = transformPricesToRecord(prices ?? [])
-  moveUnavailableHotelPricesToBottom(hotels, hotelPriceRecord)
+  const sortedHotels = moveUnavailableHotelPricesToBottom(hotels, hotelPriceRecord)
 
   return (
     <>
-      {hotels.map(hotelInfo => {
+      {sortedHotels.map(hotelInfo => {
         return (
           <ErrorBoundary
             key={hotelInfo.id}

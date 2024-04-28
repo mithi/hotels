@@ -55,7 +55,7 @@ export const HotelCardLayout = ({
   seeProviderBreakdown?: ReactNode
 }) => {
   return (
-    <Card className="flex flex-col sm:flex-row min-w-[350px]">
+    <Card data-testid="hotel-card" className="flex flex-col sm:flex-row min-w-[350px]">
       <div className="m-2 w-[250px] sm:w-[200px] lg:w-[250px] shrink-0">{photo}</div>
       <div className="w-full min-w-0 p-2 m-0">
         <CardHeader className="p-0">
