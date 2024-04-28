@@ -1,12 +1,10 @@
 import { useLocalStorage } from "usehooks-ts"
 import useSWR from "swr"
-import { HotelCard, LoadingHotelCard } from "@/components/sections/hotel"
+import HotelList from "@/components/sections/hotel-list"
+import { LoadingHotelCard } from "@/components/sections/hotel"
 import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
 import { CurrencySelect } from "@/components/common/currency-select"
 import { fetcher } from "@/lib/utils"
-import ErrorBoundary from "@/components/common/error-boundary"
-import { Card } from "@/components/ui/card"
-import { moveUnavailableHotelPricesToBottom, transformPricesToRecord } from "@/lib/hotels"
 
 function App() {
   const [currency, setCurrency] = useLocalStorage<CurrencyIdentifier>(
@@ -52,31 +50,10 @@ function App() {
     return <p>No available hotel information at this time. Try again later.</p>
   }
 
-  const hotelPriceRecord = transformPricesToRecord(hotelPrices ?? [])
-  moveUnavailableHotelPricesToBottom(hotels, hotelPriceRecord)
-
   return (
     <>
       <CurrencySelect value={currency} setValue={setCurrency} />
-      {hotels.map(hotelInfo => {
-        return (
-          <ErrorBoundary
-            key={hotelInfo.id}
-            fallbackUI={
-              <Card className="p-4 text-sm">
-                Cannot display this hotel result at this time. Try refreshing the page of
-                come back later.
-              </Card>
-            }
-          >
-            <HotelCard
-              {...hotelInfo}
-              priceInfo={hotelPriceRecord[hotelInfo.id]}
-              currency={currency}
-            />
-          </ErrorBoundary>
-        )
-      })}
+      <HotelList hotels={hotels} currency={currency} prices={hotelPrices ?? []} />
     </>
   )
 }
