@@ -4,14 +4,14 @@ export const PriceItem = ({ field, value, highlighted }: GenericItem) => {
   return (
     <div
       className={
-        "text-ellipsis flex  items-center md:items-start gap-1 shrink-0 w-full md:border-r-2 md:border-dotted md:w-[100px] md:justify-center md:flex-col"
+        "flex items-center gap-1 w-full sm:items-start sm:border-r-2 sm:border-dotted sm:w-[100px] sm:justify-center sm:flex-col"
       }
     >
-      <div className="font-bold text-left text-sm shrink-0 whitespace-nowrap text-ellipsis overflow-hidden">
+      <div className="truncate w-full font-bold text-left text-sm">
         {value}
       </div>
       <div
-        className={`text-muted-foreground items-center text-xs uppercase pr-2 mb-0 pb-0 text-left text-ellipsis overflow-hidden whitespace-nowrap ${highlighted ? "underline bg-opacity-50 font-bold" : ""}`}
+        className={`truncate w-full text-muted-foreground items-center text-xs uppercase pr-2 mb-0 pb-0 text-left ${highlighted ? "underline bg-opacity-50 font-bold" : ""}`}
       >
         {field}
       </div>

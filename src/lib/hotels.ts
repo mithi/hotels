@@ -38,6 +38,10 @@ export const providersToSortedGenericItems = (
   currency: CurrencyIdentifier
 ): GenericItem[] => {
   const sortedProviders = providers.sort((a, b) => {
+    if (a.price === b.price) {
+      return a.highlighted ? -1 : 1
+    }
+
     return a.price < b.price ? -1 : 1
   })
 
@@ -49,4 +53,73 @@ export const providersToSortedGenericItems = (
     }
   })
   return genericItems
+}
+
+export type PriceInfoPresentation = {
+  price?: string
+  taxesAndFeesBreakdown?: {
+    beforeFees: string
+    tax: string
+    hotelFee: string
+  } | null
+  sortedProviders?: GenericItem[]
+  saveUpTo?: number
+  competitorPrice?: string
+}
+
+export const priceInfoToPresentation = (
+  currency: CurrencyIdentifier,
+  priceInfo?: Omit<HotelPrice, "id">
+): PriceInfoPresentation => {
+  if (priceInfo?.price == null) {
+    return {}
+  }
+
+  const price = priceDisplay(priceInfo.price, currency)
+  const taxesAndFeesBreakdown =
+    priceInfo.taxes_and_fees == null
+      ? null
+      : {
+          beforeFees: priceDisplay(
+            priceInfo.price -
+              priceInfo.taxes_and_fees.tax -
+              priceInfo.taxes_and_fees.hotel_fees,
+            currency
+          ),
+          tax: priceDisplay(priceInfo.taxes_and_fees.tax, currency),
+          hotelFee: priceDisplay(priceInfo.taxes_and_fees.hotel_fees, currency),
+        }
+
+  if (priceInfo?.competitors == null || Object.keys(priceInfo.competitors).length === 0) {
+    return {
+      price,
+      taxesAndFeesBreakdown,
+    }
+  }
+
+  const otherProviders: ProviderItem[] = providerRecordToArray(priceInfo.competitors)
+  const mostExpensive = mostExpensiveProvider(otherProviders)
+
+  /* Assume that "Our Price" is a reserved provider here */
+  const sortedProviders = providersToSortedGenericItems(
+    [
+      ...otherProviders,
+      { provider: "Our Price", price: priceInfo.price, highlighted: true },
+    ],
+    currency
+  )
+  const competitorPrice = priceDisplay(mostExpensive.price, currency)
+
+  const saveUpTo =
+    priceInfo.price < mostExpensive.price
+      ? computeSavings(priceInfo.price, mostExpensive.price)
+      : 0
+
+  return {
+    price,
+    taxesAndFeesBreakdown,
+    sortedProviders,
+    competitorPrice,
+    saveUpTo,
+  }
 }

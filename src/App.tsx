@@ -72,6 +72,7 @@ function App() {
       {sortedHotels.map(hotelInfo => {
         return (
           <ErrorBoundary
+            key={hotelInfo.id}
             fallbackUI={
               <Card className="p-4 text-sm">
                 Cannot display this hotel result at this time. Try refreshing the page of
@@ -80,7 +81,6 @@ function App() {
             }
           >
             <HotelCard
-              key={hotelInfo.id}
               {...hotelInfo}
               priceInfo={hotelPriceRecord[hotelInfo.id]}
               currency={currency}

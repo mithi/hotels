@@ -23,7 +23,7 @@ export const ScrollableTwoColumnLayout = ({
   return (
     <>
       <div className="p-0 m-0 w-full h-full  min-w-0 items-end relative flex gap-2">
-        <div className="min-w-0 max-h-[100px] mb-10 md:h-full grow-1 shrink-1 w-full flex overflow-hidden">
+        <div className="min-w-0 mb-10 grow-1 shrink-1 w-full flex overflow-hidden  max-h-[100px] sm:h-full">
           {left}
         </div>
         <div className="shrink-0">{right}</div>
@@ -40,8 +40,8 @@ export const HotelCardLayout = ({
   rating,
   stars,
   description,
-  availableProviders,
   booking,
+  availableProviders,
   seeProviderBreakdown,
 }: {
   photo: ReactNode
@@ -50,8 +50,8 @@ export const HotelCardLayout = ({
   rating: ReactNode
   stars: ReactNode
   description: ReactNode
-  availableProviders: ReactNode
   booking: ReactNode
+  availableProviders?: ReactNode
   seeProviderBreakdown?: ReactNode
 }) => {
   return (
