@@ -70,10 +70,12 @@ export const PriceBreakdownPopover = ({
 
 export const PriceWarning = ({ hasBreakdown }: { hasBreakdown: boolean }) => {
   return (
-    <div
-      className={`text-end mb-2 text-xs ${hasBreakdown ? "text-yellow-600" : "text-lime-500"}`}
-    >
-      {hasBreakdown ? "Taxes and Hotel Fees Inclusive" : "Taxes and other fees may apply"}
+    <div className={`text-end mb-2 text-xs`}>
+      {hasBreakdown ? (
+        <span className="text-lime-500">Taxes and Hotel Fees Included</span>
+      ) : (
+        <span className="text-yellow-600">Taxes and other fees may apply</span>
+      )}
     </div>
   )
 }
