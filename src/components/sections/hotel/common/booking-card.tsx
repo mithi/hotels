@@ -11,7 +11,10 @@ export const PriceNotAvailable = () => {
 
 export const StrikeThroughPrice = ({ value }: { value: string }) => {
   return (
-    <div className="shrink-0 my-2 text-sm mb-0 pb-0 text-red-500 line-through font-normal">
+    <div
+      className="shrink-0 my-2 text-sm mb-0 pb-0 text-red-500 line-through font-normal"
+      data-testid="strikethrough-price"
+    >
       {value}
     </div>
   )
@@ -36,7 +39,11 @@ export const Savings = ({
     <BasicPopover
       side="bottom"
       trigger={
-        <Badge variant="outline" className="bg-lime-200 text-xs">
+        <Badge
+          variant="outline"
+          className="bg-lime-200 text-xs"
+          data-testid="hotel-savings"
+        >
           Save up to {value.toFixed(2)}% <CircleHelp className=" scale-75" />
         </Badge>
       }
@@ -51,7 +58,7 @@ export const PriceBreakdownPopover = ({
   trigger,
 }: {
   price: string
-  taxesAndFeesBreakdown: { beforeFees: string; tax: string; hotelFee: string }
+  taxesAndFeesBreakdown: { beforeFees: string; tax: string; hotelFees: string }
   trigger?: ReactNode
 }) => {
   return (
@@ -61,7 +68,7 @@ export const PriceBreakdownPopover = ({
         <PriceBreakdownTable
           beforeFees={taxesAndFeesBreakdown.beforeFees}
           tax={taxesAndFeesBreakdown.tax}
-          hotelFee={taxesAndFeesBreakdown.hotelFee}
+          hotelFees={taxesAndFeesBreakdown.hotelFees}
           total={price}
         />
       }
@@ -95,17 +102,14 @@ export const BookingCardLayout = ({
   subtitle?: ReactNode
 }) => {
   return (
-    <div className="border rounded-lg m-0 p-2 flex flex-col justify-end text-end items-end">
+    <section className="border rounded-lg m-0 p-2 flex flex-col justify-end text-end items-end">
       {savings}
-      <div
-        className="flex flex-col md:flex-row md:gap-2 items-end font-bold"
-        data-testid="booking-card-price"
-      >
+      <div className="flex flex-col md:flex-row md:gap-2 items-end font-bold">
         {strikethroughPrice} {price}
       </div>
       {subtitle}
       {action}
-    </div>
+    </section>
   )
 }
 

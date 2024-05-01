@@ -37,7 +37,7 @@ export const priceDisplay = (price: number, currency: CurrencyIdentifier) => {
 export const precisePriceDisplay = (price: number, currency: CurrencyIdentifier) => {
   const currencySymbol = availableCurrenciesRecord[currency].symbol
 
-  if (["KRW", "IDR"].includes(currency)) {
+  if (["KRW", "JPY", "IDR"].includes(currency)) {
     return `${currencySymbol} ${price.toLocaleString()}`
   }
 

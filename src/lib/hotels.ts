@@ -75,7 +75,7 @@ export type PriceInfoPresentation = {
   taxesAndFeesBreakdown?: {
     beforeFees: string
     tax: string
-    hotelFee: string
+    hotelFees: string
   } | null
   sortedProviders?: GenericItem[]
   saveUpTo?: number | null
@@ -114,7 +114,7 @@ export const priceInfoToPresentation = (
             currency
           ),
           tax: precisePriceDisplay(priceInfo.taxes_and_fees.tax, currency),
-          hotelFee: precisePriceDisplay(priceInfo.taxes_and_fees.hotel_fees, currency),
+          hotelFees: precisePriceDisplay(priceInfo.taxes_and_fees.hotel_fees, currency),
         }
 
   if (priceInfo?.competitors == null || Object.keys(priceInfo.competitors).length === 0) {

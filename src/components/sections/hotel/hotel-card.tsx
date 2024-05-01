@@ -52,7 +52,10 @@ function HotelCard({
       stars={<HotelStars value={stars} />}
       availableProviders={
         info.sortedProviders && (
-          <ol className="flex gap-2 flex-col md:flex-row w-full">
+          <ol
+            className="flex gap-2 flex-col md:flex-row w-full"
+            data-testid="hotel-provider-prices"
+          >
             {info.sortedProviders.map(provider => {
               return <PriceItem key={provider.field} {...provider} />
             })}
@@ -88,7 +91,7 @@ function HotelCard({
                 taxesAndFeesBreakdown={info.taxesAndFeesBreakdown}
               />
             ) : (
-              info.price
+              <span data-testid="hotel-price-display-simple">{info.price}</span>
             )
           }
           subtitle={

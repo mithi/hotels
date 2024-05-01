@@ -10,18 +10,18 @@ import {
 
 export function PriceBreakdownTable({
   total,
-  hotelFee,
+  hotelFees,
   tax,
   beforeFees,
 }: {
   beforeFees: string
   total: string
-  hotelFee: string
+  hotelFees: string
   tax: string
 }) {
   return (
     <>
-      <Table>
+      <Table data-testid="price-breakdown-table">
         <TableHeader>
           <TableRow>
             <TableHead>Item</TableHead>
@@ -38,8 +38,8 @@ export function PriceBreakdownTable({
             <TableCell>{tax}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Hotel Fee</TableCell>
-            <TableCell>{hotelFee}</TableCell>
+            <TableCell>Hotel Fees</TableCell>
+            <TableCell>{hotelFees}</TableCell>
           </TableRow>
         </TableBody>
         <TableFooter>

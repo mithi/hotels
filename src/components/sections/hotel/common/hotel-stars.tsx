@@ -6,6 +6,7 @@ const HotelStars = ({ value }: { value: number }) => {
       {[...Array(value).keys()].map(star => {
         return (
           <Star
+            data-icon="hotel-star"
             key={star}
             stroke="orange"
             fill="orange"
