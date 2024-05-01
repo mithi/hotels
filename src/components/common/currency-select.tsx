@@ -34,3 +34,5 @@ export const CurrencySelect = ({
     </Select>
   )
 }
+
+export default CurrencySelect

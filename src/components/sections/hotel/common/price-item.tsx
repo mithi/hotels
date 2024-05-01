@@ -2,7 +2,7 @@ import { GenericItem } from "@/types"
 
 export const PriceItem = ({ field, value, highlighted }: GenericItem) => {
   return (
-    <div
+    <li
       className={
         "truncate flex items-center gap-1 w-full min-h-[13px] md:items-start md:border-r-2 md:border-dotted md:min-w-[100px] md:w-[100px] md:justify-center md:flex-col"
       }
@@ -13,7 +13,7 @@ export const PriceItem = ({ field, value, highlighted }: GenericItem) => {
       >
         {field}
       </div>
-    </div>
+    </li>
   )
 }
 

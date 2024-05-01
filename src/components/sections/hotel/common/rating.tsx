@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 
-// 9 excelle  8 above 7 very good 6 good
+// Note: we can change the meaning of each rating depending on specs
+// 9 excellent,  8 above, 7 very good, 6 good, Review Score
 export const Rating = ({ value }: { value: number }) => {
   const meaning =
     value >= 9
@@ -13,12 +14,12 @@ export const Rating = ({ value }: { value: number }) => {
             ? "Good"
             : "Review Score"
   return (
-    <div aria-label={`Rating of ${value} (${meaning}) `} role="figure">
+    <figure aria-label={`Rating of ${value} (${meaning}) `}>
       <Badge aria-hidden={true}>{value}</Badge>
       <span aria-hidden={true} className="px-2 border-r-2 border-dotted text-sm">
         {meaning}
       </span>
-    </div>
+    </figure>
   )
 }
 

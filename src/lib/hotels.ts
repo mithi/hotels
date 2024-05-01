@@ -5,7 +5,7 @@ import {
   HotelPrice,
   ProviderItem,
 } from "@/types"
-import { priceDisplay } from "./currencies"
+import { precisePriceDisplay, priceDisplay } from "./currencies"
 
 /* map hotelId -> HotelPrice */
 export const transformPricesToRecord = (
@@ -91,18 +91,30 @@ export const priceInfoToPresentation = (
   }
 
   const price = priceDisplay(priceInfo.price, currency)
+
+  /**
+    Your question
+    Because I also round the prices, taxes, and fees before displaying them. 
+    I was thinking that there might be cases where the summing of the values might 
+    not correctly equal the total due to the rounding of the displayed price.
+    Should I not round when displaying the breakdown?
+
+    Answer
+    We don't need to round down taxes, fees as individual components.
+    Usually we only round down the final amount. hope this clarifies your questions
+   */
   const taxesAndFeesBreakdown =
     priceInfo.taxes_and_fees == null
       ? null
       : {
-          beforeFees: priceDisplay(
+          beforeFees: precisePriceDisplay(
             priceInfo.price -
               priceInfo.taxes_and_fees.tax -
               priceInfo.taxes_and_fees.hotel_fees,
             currency
           ),
-          tax: priceDisplay(priceInfo.taxes_and_fees.tax, currency),
-          hotelFee: priceDisplay(priceInfo.taxes_and_fees.hotel_fees, currency),
+          tax: precisePriceDisplay(priceInfo.taxes_and_fees.tax, currency),
+          hotelFee: precisePriceDisplay(priceInfo.taxes_and_fees.hotel_fees, currency),
         }
 
   if (priceInfo?.competitors == null || Object.keys(priceInfo.competitors).length === 0) {

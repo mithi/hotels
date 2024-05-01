@@ -1,7 +1,7 @@
 import { MapPin } from "lucide-react"
 import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
-import BasicPopover from "@/components/common/basic-popover"
 import { PriceInfoPresentation, priceInfoToPresentation } from "@/lib/hotels"
+import { BasicPopover } from "@/components/common"
 import {
   HotelCardLayout,
   PriceItem,
@@ -44,7 +44,7 @@ function HotelCard({
             className={"scale-90"}
             aria-hidden={true}
           />
-          {address}
+          <address>{address}</address>
         </>
       }
       description={<SeeMoreDescription htmlString={description} />}
@@ -52,11 +52,11 @@ function HotelCard({
       stars={<HotelStars value={stars} />}
       availableProviders={
         info.sortedProviders && (
-          <div className="flex gap-2 flex-col md:flex-row w-full">
+          <ol className="flex gap-2 flex-col md:flex-row w-full">
             {info.sortedProviders.map(provider => {
               return <PriceItem key={provider.field} {...provider} />
             })}
-          </div>
+          </ol>
         )
       }
       seeProviderBreakdown={

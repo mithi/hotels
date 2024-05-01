@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react"
+import { ReactNode } from "react"
 import {
   Popover,
   PopoverAnchor,
@@ -15,28 +15,10 @@ const BasicPopover = ({
   content: ReactNode
   side?: "top" | "right" | "bottom" | "left"
 }) => {
-  const [open, setOpen] = useState(false)
-
-  const handleMouseEnter = () => {
-    setOpen(true)
-  }
-
-  const handleMouseLeave = () => {
-    setOpen(false)
-  }
-
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        {trigger}
-      </PopoverTrigger>
-      <PopoverContent
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        side={side ?? "bottom"}
-      >
-        {content}
-      </PopoverContent>
+    <Popover>
+      <PopoverTrigger>{trigger}</PopoverTrigger>
+      <PopoverContent side={side ?? "bottom"}>{content}</PopoverContent>
       <PopoverAnchor />
     </Popover>
   )

@@ -1,9 +1,9 @@
+import { ReactNode } from "react"
 import { CircleHelp } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import BasicPopover from "@/components/common/basic-popover"
+import { HoverPopover, BasicPopover } from "@/components/common"
 import PriceBreakdownTable from "./price-breakdown-table"
-import { ReactNode } from "react"
 
 export const PriceNotAvailable = () => {
   return <p className="m-1 text-sm font-bold">Rates unavailable</p>
@@ -34,8 +34,9 @@ export const Savings = ({
 }) => {
   return (
     <BasicPopover
+      side="bottom"
       trigger={
-        <Badge variant="outline" className="bg-lime-200  text-xs">
+        <Badge variant="outline" className="bg-lime-200 text-xs">
           Save up to {value.toFixed(2)}% <CircleHelp className=" scale-75" />
         </Badge>
       }
@@ -54,7 +55,7 @@ export const PriceBreakdownPopover = ({
   trigger?: ReactNode
 }) => {
   return (
-    <BasicPopover
+    <HoverPopover
       trigger={trigger ?? <>{price}*</>}
       content={
         <PriceBreakdownTable

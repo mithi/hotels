@@ -1,8 +1,8 @@
-import { HotelCard } from "@/components/sections/hotel"
 import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
-import ErrorBoundary from "@/components/common/error-boundary"
 import { Card } from "@/components/ui/card"
+import { ErrorBoundary } from "@/components/common/"
 import { moveUnavailableHotelPricesToBottom, transformPricesToRecord } from "@/lib/hotels"
+import { HotelCard } from "../hotel"
 
 function HotelList({
   currency,

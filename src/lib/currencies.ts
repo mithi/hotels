@@ -33,3 +33,16 @@ export const priceDisplay = (price: number, currency: CurrencyIdentifier) => {
       : price
   return `${currencySymbol} ${roundedPrice.toLocaleString()}`
 }
+
+export const precisePriceDisplay = (price: number, currency: CurrencyIdentifier) => {
+  const currencySymbol = availableCurrenciesRecord[currency].symbol
+
+  if (["KRW", "IDR"].includes(currency)) {
+    return `${currencySymbol} ${price.toLocaleString()}`
+  }
+
+  return `${currencySymbol} ${price.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`
+}
