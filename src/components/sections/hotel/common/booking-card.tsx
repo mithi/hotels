@@ -30,7 +30,7 @@ export const BookingAction = ({ onClick }: { onClick?: () => void }) => {
 
 export const Savings = ({
   value,
-  message = "Savings are computed based on the most expensive known provider",
+  message = "Savings are computed against the most expensive known provider using the original unrounded prices",
 }: {
   value: number
   message?: string
