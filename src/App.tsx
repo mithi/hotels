@@ -16,17 +16,22 @@ function App() {
     data: hotels,
     error: hotelError,
     isLoading: hotelLoading,
+    isValidating: hotelValidating,
   } = useSWR<HotelInfo[]>(
     "https://61c3e5d2f1af4a0017d99115.mockapi.io/hotels/tokyo",
     fetcher
   )
 
-  const { data: hotelPrices, isLoading: pricesLoading } = useSWR<HotelPrice[]>(
+  const {
+    data: hotelPrices,
+    isLoading: pricesLoading,
+    isValidating: priceValidating,
+  } = useSWR<HotelPrice[]>(
     `https://61c3e5d2f1af4a0017d99115.mockapi.io/hotels/tokyo/1/${currency}`,
     fetcher
   )
 
-  if (hotelLoading || pricesLoading) {
+  if (hotelLoading || pricesLoading || hotelValidating || priceValidating) {
     return (
       <>
         <CurrencySelect disabled={true} value={currency} setValue={setCurrency} />
