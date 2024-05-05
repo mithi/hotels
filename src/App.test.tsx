@@ -159,21 +159,17 @@ describe("App", () => {
     ).toBeInTheDocument()
   })
 
-  it("Allow users to switch currencies and Refreshing the page should show the last currency selected", async () => {
-    const localStorageSetItemSpy = vi.spyOn(localStorage, "setItem")
+  it("Allows users see other currency options and switch currencies", async () => {
     const user = userEvent.setup()
-
-    window.localStorage.clear()
-    const firstApp = render(<App key="first" />)
-
+    render(<App />)
     const trigger = screen.getByRole("combobox", { name: "currency-select" })
-    expect(window.localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY)).toBeUndefined()
 
     await waitFor(() => {
       expect(trigger).not.toBeDisabled()
     })
 
-    expect(trigger).toBeInTheDocument()
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
+
     await user.click(trigger)
 
     expect(trigger).toHaveAttribute("aria-expanded", "true")
@@ -207,10 +203,36 @@ describe("App", () => {
 
     expect(trigger).toHaveAttribute("aria-expanded", "false")
     expect(within(trigger).getByText(displayTextOfSelectedCurrency)).toBeInTheDocument()
+  })
+
+  it("Refreshing the page should show the last currency selected", async () => {
+    const localStorageSetItemSpy = vi.spyOn(localStorage, "setItem")
+    const user = userEvent.setup()
+
+    window.localStorage.clear()
+    const firstApp = render(<App key="first" />)
+
+    const trigger = screen.getByRole("combobox", { name: "currency-select" })
+    expect(window.localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY)).toBeUndefined()
+
+    await waitFor(() => {
+      expect(trigger).not.toBeDisabled()
+    })
+
+    await user.click(trigger)
+
+    const randomCurrencyToSelect = getRandomItem([
+      "SGD",
+      "CNY",
+      "KRW",
+    ] as CurrencyIdentifier[])
+
+    const displayTextOfSelectedCurrency =
+      currencyItemSelectionDisplay(randomCurrencyToSelect)
+
+    await user.click(screen.getByRole("option", { name: displayTextOfSelectedCurrency }))
 
     expect(localStorageSetItemSpy).toHaveBeenCalled()
-    expect(window.localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY)).not.toBeUndefined()
-
     expect(window.localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY)).toEqual(
       `"${randomCurrencyToSelect}"`
     )
@@ -230,8 +252,6 @@ describe("App", () => {
     await waitFor(() => {
       expect(newTrigger).not.toBeDisabled()
     })
-
-    expect(window.localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY)).not.toBeUndefined()
 
     expect(window.localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY)).toEqual(
       `"${randomCurrencyToSelect}"`
