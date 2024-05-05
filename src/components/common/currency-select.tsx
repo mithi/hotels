@@ -6,6 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { availableCurrencies } from "@/constants"
+import { currencyItemSelectionDisplay } from "@/lib/currencies"
 import { CurrencyIdentifier } from "@/types"
 
 export const CurrencySelect = ({
@@ -19,14 +20,14 @@ export const CurrencySelect = ({
 }) => {
   return (
     <Select disabled={disabled} value={value} onValueChange={setValue}>
-      <SelectTrigger className="w-[250px]">
+      <SelectTrigger className="w-[250px]" aria-label="currency-select">
         <SelectValue placeholder="Select Currency" />
       </SelectTrigger>
       <SelectContent>
         {availableCurrencies.map(current => {
           return (
             <SelectItem key={current.name} value={current.name}>
-              {current.name} ({current.symbol}) - {current.description}
+              {currencyItemSelectionDisplay(current.name)}
             </SelectItem>
           )
         })}

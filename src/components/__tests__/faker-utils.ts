@@ -27,8 +27,8 @@ export const generateRandomNumber = (params?: {
   }
 }): number => {
   const options = {
-    min: params?.options?.min ?? 100,
-    max: params?.options?.max ?? 1000,
+    min: params?.options?.min,
+    max: params?.options?.max,
     fractionDigits: params?.options?.fractionDigits ?? 2,
   }
   if (params?.type === "int") {
@@ -38,7 +38,7 @@ export const generateRandomNumber = (params?: {
   return faker.number.float(options)
 }
 
-const getRandomItem = <T>(items: T[]): T => {
+export const getRandomItem = <T>(items: T[]): T => {
   return items[Math.floor(Math.random() * items.length)]
 }
 

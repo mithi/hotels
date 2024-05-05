@@ -5,11 +5,13 @@ import { LoadingHotelCard } from "@/components/sections/hotel"
 import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
 import { CurrencySelect } from "@/components/common/currency-select"
 import { fetcher } from "@/lib/utils"
+import { HOTEL_URL, LOCAL_STORAGE_CURRENCY_KEY, PRICE_URL } from "./constants"
+import { availableCurrenciesRecord } from "./lib/currencies"
 
 function App() {
   const [currency, setCurrency] = useLocalStorage<CurrencyIdentifier>(
-    "selected-currency",
-    "USD"
+    LOCAL_STORAGE_CURRENCY_KEY,
+    availableCurrenciesRecord.USD.name
   )
 
   const {
@@ -17,19 +19,13 @@ function App() {
     error: hotelError,
     isLoading: hotelLoading,
     isValidating: hotelValidating,
-  } = useSWR<HotelInfo[]>(
-    "https://61c3e5d2f1af4a0017d99115.mockapi.io/hotels/tokyo",
-    fetcher
-  )
+  } = useSWR<HotelInfo[]>(HOTEL_URL, fetcher)
 
   const {
     data: hotelPrices,
     isLoading: pricesLoading,
     isValidating: priceValidating,
-  } = useSWR<HotelPrice[]>(
-    `https://61c3e5d2f1af4a0017d99115.mockapi.io/hotels/tokyo/1/${currency}`,
-    fetcher
-  )
+  } = useSWR<HotelPrice[]>(`${PRICE_URL}/${currency}`, fetcher)
 
   if (hotelLoading || pricesLoading || hotelValidating || priceValidating) {
     return (

@@ -8,9 +8,9 @@ import {
   generateFakeText,
   generateRandomNumber,
   getRandomCurrency,
-} from "./faker-utils"
+} from "../../__tests__/faker-utils"
 import { CurrencyIdentifier, HotelInfo, HotelPrice } from "@/types"
-import { HotelCard } from "../sections/hotel"
+import { HotelCard } from "."
 import { computeSavings } from "@/lib/hotels"
 import { precisePriceDisplay, priceDisplay } from "@/lib/currencies"
 
@@ -23,6 +23,14 @@ describe("HotelCard", () => {
     it("Should display hotel name in the heading", () => {
       render(<HotelCard currency={currency} {...hotelInfo} />)
       expect(screen.getByRole("heading", { name: hotelInfo.name })).toBeInTheDocument()
+    })
+
+    it("Should display image", () => {
+      render(<HotelCard currency={currency} {...hotelInfo} />)
+      const photoName = `Preview Image for ${hotelInfo.name}`
+      const photoNode = screen.getByRole("img", { name: photoName })
+      expect(photoNode).toBeInTheDocument()
+      expect(photoNode).toHaveAttribute("src", hotelInfo.photo)
     })
 
     it("Should display the booking button", () => {
@@ -346,9 +354,11 @@ describe("HotelCard", () => {
       const mostExpensivePrice = generateRandomNumber({
         options: { min: 500, max: 700, fractionDigits: 2 },
       })
+
       const moreExpensivePrice = generateRandomNumber({
         options: { min: 300, max: 400, fractionDigits: 2 },
       })
+
       const cheaperPrice = generateRandomNumber({
         options: { min: 10, max: 99, fractionDigits: 2 },
       })

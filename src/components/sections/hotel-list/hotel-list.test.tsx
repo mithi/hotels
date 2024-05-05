@@ -8,7 +8,7 @@ import {
   generateFakeHotelInfo,
   generateRandomNumber,
   getRandomCurrency,
-} from "./faker-utils"
+} from "@/components/__tests__/faker-utils"
 
 describe("HotelList", () => {
   /* make sure ids wont overlap */
@@ -37,7 +37,7 @@ describe("HotelList", () => {
     generateFakeHotelInfo(secondHotelId),
   ]
 
-  /* Make sure prices wont overlap */
+  /* Make sure prices won't overlap */
   const priceWithoutHotelInfo = {
     id: priceWithoutHotelInfoId,
     price: generateRandomNumber({ options: { min: 100, max: 1000 } }),
@@ -60,10 +60,11 @@ describe("HotelList", () => {
   it("should have the correct number of hotel items", () => {
     render(<HotelList currency={currency} hotels={hotels} prices={prices} />)
     const rows = screen.getAllByTestId("hotel-card")
-    expect(rows.length === hotels.length)
+    expect(rows.length).toEqual(hotels.length)
   })
 
   it("should render hotel results in correct order, with hotels with no price at the bottom", () => {
+    // No prescribed way to check elements are rendered with specific sorting
     // https://stackoverflow.com/questions/61148880/how-to-check-elements-are-rendered-with-a-specific-sorting-with-react-testing-li
     render(<HotelList currency={currency} hotels={hotels} prices={prices} />)
     const rows = screen.getAllByTestId("hotel-card")

@@ -24,25 +24,30 @@ export const priceDisplay = (price: number, currency: CurrencyIdentifier) => {
 
   */
 
-  const currencySymbol = availableCurrenciesRecord[currency].symbol
+  const currencySymbol = availableCurrenciesRecord[currency]?.symbol
 
   const roundedPrice = ["USD", "SGD", "CNY"].includes(currency)
-    ? Math.round(price)
+    ? Math.floor(price)
     : ["KRW", "JPY", "IDR"].includes(currency)
-      ? Math.round(price / 100) * 100
+      ? Math.floor(price / 100) * 100
       : price
-  return `${currencySymbol} ${roundedPrice.toLocaleString()}`
+  return `${currencySymbol ?? currency} ${roundedPrice.toLocaleString()}`
 }
 
 export const precisePriceDisplay = (price: number, currency: CurrencyIdentifier) => {
-  const currencySymbol = availableCurrenciesRecord[currency].symbol
+  const currencySymbol = availableCurrenciesRecord[currency]?.symbol
 
   if (["KRW", "JPY", "IDR"].includes(currency)) {
     return `${currencySymbol} ${price.toLocaleString()}`
   }
 
-  return `${currencySymbol} ${price.toLocaleString(undefined, {
+  return `${currencySymbol ?? currency} ${price.toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`
+}
+
+export const currencyItemSelectionDisplay = (currency: CurrencyIdentifier): string => {
+  const current = availableCurrenciesRecord[currency]
+  return `${current.name} (${current.symbol}) - ${current.description}`
 }

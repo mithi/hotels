@@ -24,7 +24,7 @@
 
 ### Price Rounding Based on Currency
 
-- ✅ Prices are rounded. USD, SGD, CNY are rounded to the nearest dollar. KRW, JPW, IDR rounded to the nearest 100-dollars.
+- ✅ Prices are rounded. USD, SGD, CNY are rounded to the nearest dollar. KRW, JPY, IDR rounded to the nearest 100-dollars.
 
 |                                         |                                         |                                         |                                         |
 | --------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
