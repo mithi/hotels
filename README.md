@@ -66,8 +66,3 @@
 - Testing - Emphasize having tests to ensure reliable code, write specs for essential logic in your features
 
 [Specifications](https://gist.github.com/mal90/4627e6beb44ec038b90f64ea1bb30638)
-
-## Notes
-
-- [How to test window reloading](https://stackoverflow.com/questions/55712640/jest-testing-window-location-reload)
-- How to test with local storage [Stackoverflow](https://stackoverflow.com/questions/65282181/how-to-use-jest-for-testing-a-react-component-with-localstorage), [Article](https://robertmarshall.dev/blog/how-to-mock-local-storage-in-jest-tests/)
