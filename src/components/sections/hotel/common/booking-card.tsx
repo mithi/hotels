@@ -80,9 +80,13 @@ export const PriceWarning = ({ hasBreakdown }: { hasBreakdown: boolean }) => {
   return (
     <div className={`text-end mb-2 text-xs`}>
       {hasBreakdown ? (
-        <span className="text-lime-500">Taxes and Hotel Fees Included</span>
+        <span className="text-lime-500" data-testid="other-fees-included">
+          Taxes and Hotel Fees Included
+        </span>
       ) : (
-        <span className="text-yellow-600">Taxes and other fees may apply</span>
+        <span className="text-yellow-600" data-testid="other-fees-not-included">
+          Taxes and other fees may apply
+        </span>
       )}
     </div>
   )
